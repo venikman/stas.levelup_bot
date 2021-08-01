@@ -1,0 +1,24 @@
+{
+  "name": "storage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "source local.sh && node ./api/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/venikman/stas.levelup_bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/venikman/stas.levelup_bot/issues"
+  },
+  "homepage": "https://github.com/venikman/stas.levelup_bot#readme",
+  "dependencies": {
+    "fastify": "^3.19.2",
+    "node-telegram-bot-api": "^0.54.0"
+  }
+}
