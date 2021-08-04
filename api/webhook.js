@@ -2,6 +2,7 @@
 // Fixes an error with Promise cancellation
 process.env.NTBA_FIX_319 = "test";
 
+
 const TelegramBot = require("node-telegram-bot-api");
 
 module.exports = async (request, response) => {
@@ -10,7 +11,7 @@ module.exports = async (request, response) => {
     // bot.setWebHook(`${process.env.VERCEL_URL}/bot${process.env.BOT_TOKEN}`);
     const { body } = request;
     if (body.message) {
-      const { chat: { id }, text } = body.message;
+      const { chat: { id }, text, from: {first_name, username} } = body.message;
       if (text === "/start") {
         await bot.sendMessage(id, "Привет, чем я могу помочь?", {
           reply_markup: {
@@ -26,6 +27,7 @@ module.exports = async (request, response) => {
             resize_keyboard: true,
           },
         });
+        await bot.sendMessage(process.env.ADMIN_CHAT, `@${username} ${first_name} нажал ${text}`)
       } else if (text === "Скачать гайд") {
         await bot.sendMessage(id, "Жми на кнопку и качай гайд!", {
           reply_markup: {
@@ -38,6 +40,7 @@ module.exports = async (request, response) => {
             ],
           },
         });
+        await bot.sendMessage(process.env.ADMIN_CHAT, `@${username} ${first_name} нажал ${text}`)
       } else if (text === "Запись на бесплатную консультацию") {
         await bot.sendMessage(
           id,
@@ -53,12 +56,14 @@ module.exports = async (request, response) => {
             },
           },
         );
+        await bot.sendMessage(process.env.ADMIN_CHAT, `@${username} ${first_name} нажал ${text}`)
       } else {
         const message =
           `✅ Thanks for your message: *"${text}"*\nHave a great day! 👋🏻`;
 
         await bot.sendMessage(id, message, { parse_mode: "Markdown" });
       }
+
     }
   } catch (error) {
     console.error("Error sending message");

@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/venikman/stas.levelup_bot#readme",
   "dependencies": {
-    "fastify": "^3.19.2",
     "node-telegram-bot-api": "^0.54.0"
   }
 }
